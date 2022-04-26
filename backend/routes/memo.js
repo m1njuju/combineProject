@@ -15,7 +15,22 @@ router.get('/', function(req, res, next) {
      * (4) AboutView에서 axios로 보낸 request를 받고
      * (5) memos의 값을 response를 통해 보내줌
      */
-})
+});
+
+router.post("/", function (req, res, next) {
+    console.log(req.body);
+    const title = req.body.data.title;
+    const memo = req.body.data.memo;
+    const id = memos.length; // 메모가 삭제되지않을 경우
+    const memoboard = {
+      id: id + 1,
+      title: title,
+      memo: memo,
+      writer: "익명",
+    };
+    memos.push(memoboard);
+    res.send("ok");
+  });
 
 // 해당 id의 title과 메모 보여줌
 // /api/memo/:id (:id 와 같은 :콜론 기호를 붙이는 곳은 라우터에서만)
